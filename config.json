@@ -1,0 +1,13 @@
+{
+    "INTER_TRIAL_INTERVAL": 1000,
+    "MODE": "offline",
+    "NUM_TRIALS": 2,
+    "SAMPLING_FREQUENCY": 128,
+    "SESSION_NUMBER": 0,
+    "SUBJECT_NUMBER": 0,
+    "TARGETS": {
+        "1": "task1",
+        "2": "task2"
+    },
+    "TRIAL_DURATION": 2000
+}
