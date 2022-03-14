@@ -14,6 +14,8 @@ Notes:
 ## IMPORTS
 import mindwave
 from psychopy import visual
+from sklearn.linear_model import LinearRegression
+import numpy as np
 import json
 import time
 import pandas as pd
@@ -21,6 +23,7 @@ from random import choices
 from tqdm import tqdm
 import sys
 import os
+import pyautogui
 from os.path import join as pjoin
 
 ##########################################################################
@@ -117,6 +120,7 @@ def on_raw(headset, rawvalue):
     data['blink'].append(blink)
     data['label'].append(label)
 
+
 def print_seconds_elapsed():
     '''
     Print "second elapsed" every second
@@ -172,10 +176,11 @@ def dummy_train():
 
 def dummy_predict(data):
     # change this function to a real online prediction function (if you need one)
-    if data['attention'][-1] % 2 == 0:
-        print('Cats > Dogs')
+    if data['attention'][-1] >55:
+        #pyautogui.write("hello world", interval = 0.25)
+        pyautogui.press('e')
     else:
-        print('Dogs > Cats')
+        print('pause')
 
 def update_offline_collection_gui(trial_permutation, trial_index, duration):
     '''
@@ -216,8 +221,8 @@ if __name__ == "__main__":
             'label':[]}
 
     print("Connecting...")
-    headset = mindwave.Headset('/dev/tty.MindWaveMobile') # mac version
-    #headset = mindwave.Headset('COM6') # windows version. set up COM port first (see video)
+    # headset = mindwave.Headset('/dev/tty.MindWaveMobile-SerialPo') # mac version
+    headset = mindwave.Headset('COM3') # windows version. set up COM port first (see video)
     print("Connected!")
 
     print("Starting...")
@@ -276,7 +281,7 @@ if __name__ == "__main__":
             time.sleep(0.1)
             while True:
                 dummy_predict(data)
-                time.sleep(1)
+                time.sleep(0.5)
         finally:
             headset.stop()
             print("Stopped!")
